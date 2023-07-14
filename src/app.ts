@@ -19,6 +19,6 @@ export class App {
   public async init() {
     this.useRoutes();
     this.server = this.app.listen(this.port);
-    console.log(`Сервер запущен на http://localhost:${this.port}`);
+    console.log(`On http://localhost:${this.port}`);
   }
 }
