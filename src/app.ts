@@ -1,6 +1,6 @@
-import express, { Express } from 'express';
-import { userRouter } from './users/users';
-import { Server } from 'http';
+import express from 'express';
+import type { Express } from 'express';
+import type { Server } from 'http';
 
 export class App {
   app: Express;
@@ -12,12 +12,7 @@ export class App {
     this.port = 8000;
   }
 
-  useRoutes() {
-    this.app.use('/users', userRouter);
-  }
-
-  public async init() {
-    this.useRoutes();
+  public init() {
     this.server = this.app.listen(this.port);
     console.log(`On http://localhost:${this.port}`);
   }
