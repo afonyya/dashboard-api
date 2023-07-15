@@ -1,19 +1,21 @@
-import express from 'express';
-import type { Express } from 'express';
-import type { Server } from 'http';
+import express, { Express } from 'express';
+import { Server } from 'http';
+import { LoggerService } from './logger/logger.service';
 
 export class App {
   app: Express;
   server: Server;
   port: number;
+  logger: LoggerService;
 
-  constructor() {
+  constructor(logger: LoggerService) {
     this.app = express();
-    this.port = 8000;
+    this.port = 3000;
+    this.logger = logger;
   }
 
   public init() {
     this.server = this.app.listen(this.port);
-    console.log(`On http://localhost:${this.port}`);
+    this.logger.log(`Server is running on http://localhost:${this.port}`);
   }
 }
