@@ -15,22 +15,22 @@ export class App {
 
   constructor(
     @inject(TYPES.ILogger) private logger: ILogger,
-    @inject(TYPES.UsersController) private userController: UsersController,
+    @inject(TYPES.IUsersController) private userController: UsersController,
     @inject(TYPES.IExeptionFilter) private exeptionFilter: ExeptionFilter,
   ) {
     this.app = express();
     this.port = 3000;
   }
 
-  useRoutes() {
+  useRoutes(): void {
     this.app.use('/users', this.userController.router);
   }
 
-  useExeptionFilters() {
+  useExeptionFilters(): void {
     this.app.use(this.exeptionFilter.catch.bind(this.exeptionFilter));
   }
 
-  public init() {
+  public init(): void {
     this.useRoutes();
     this.useExeptionFilters();
     this.server = this.app.listen(this.port);
