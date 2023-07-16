@@ -21,6 +21,7 @@
   "homepage": "https://github.com/afonyya/dashboard-api#readme",
   "dependencies": {
     "express": "^4.18.2",
+    "reflect-metadata": "^0.1.13",
     "tslog": "^3.2.2"
   },
   "devDependencies": {
