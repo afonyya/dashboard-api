@@ -1,4 +1,4 @@
-export class UsersRegisterDto {
+export class UserRegisterDto {
   email: string;
   password: string;
   name: string;

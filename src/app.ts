@@ -3,7 +3,7 @@ import express, { Express } from 'express';
 import { Server } from 'http';
 import 'reflect-metadata';
 import { json } from 'body-parser';
-import { UsersController } from './users/users.controller';
+import { UserController } from './user/user.controller';
 import { ExeptionFilter } from './errors/exeption.filter';
 import { ILogger } from './logger/logger.interface';
 import { TYPES } from './types';
@@ -16,7 +16,7 @@ export class App {
 
   constructor(
     @inject(TYPES.ILogger) private logger: ILogger,
-    @inject(TYPES.IUsersController) private userController: UsersController,
+    @inject(TYPES.IUserController) private userController: UserController,
     @inject(TYPES.IExeptionFilter) private exeptionFilter: ExeptionFilter,
   ) {
     this.app = express();
@@ -28,7 +28,7 @@ export class App {
   }
 
   useRoutes(): void {
-    this.app.use('/users', this.userController.router);
+    this.app.use('/user', this.userController.router);
   }
 
   useExeptionFilters(): void {

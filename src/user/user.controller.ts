@@ -5,15 +5,13 @@ import { BaseController } from '../common/base.controller';
 import { HTTPError } from '../errors/http-error';
 import { TYPES } from '../types';
 import { ILogger } from '../logger/logger.interface';
-import { IUsersController } from './users.controller.interface';
-import { UsersLoginDto } from './dto/users-login.dto';
-import { UsersRegisterDto } from './dto/users-register.dto';
+import { IUserController } from './user.controller.interface';
+import { UserLoginDto } from './dto/user-login.dto';
+import { UserRegisterDto } from './dto/user-register.dto';
+import { UserEntity } from './user.entity';
 
 @injectable()
-export class UsersController
-  extends BaseController
-  implements IUsersController
-{
+export class UserController extends BaseController implements IUserController {
   constructor(@inject(TYPES.ILogger) private loggerService: ILogger) {
     super(loggerService);
     this.bindRoutes([
@@ -22,16 +20,18 @@ export class UsersController
     ]);
   }
 
-  register(
-    req: Request<{}, {}, UsersRegisterDto>,
+  async register(
+    { body }: Request<{}, {}, UserRegisterDto>,
     res: Response,
     next: NextFunction,
-  ): void {
-    this.ok(res, 'register');
+  ): Promise<void> {
+    const user = new UserEntity(body.email, body.name);
+    await user.setPassword(body.password);
+    this.ok(res, user);
   }
 
   login(
-    req: Request<{}, {}, UsersLoginDto>,
+    req: Request<{}, {}, UserLoginDto>,
     res: Response,
     next: NextFunction,
   ): void {
