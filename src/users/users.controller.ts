@@ -6,6 +6,8 @@ import { HTTPError } from '../errors/http-error';
 import { TYPES } from '../types';
 import { ILogger } from '../logger/logger.interface';
 import { IUsersController } from './users.controller.interface';
+import { UsersLoginDto } from './dto/users-login.dto';
+import { UsersRegisterDto } from './dto/users-register.dto';
 
 @injectable()
 export class UsersController
@@ -20,11 +22,19 @@ export class UsersController
     ]);
   }
 
-  register(req: Request, res: Response, next: NextFunction): void {
+  register(
+    req: Request<{}, {}, UsersRegisterDto>,
+    res: Response,
+    next: NextFunction,
+  ): void {
     this.ok(res, 'register');
   }
 
-  login(req: Request, res: Response, next: NextFunction): void {
+  login(
+    req: Request<{}, {}, UsersLoginDto>,
+    res: Response,
+    next: NextFunction,
+  ): void {
     next(new HTTPError(401, 'auth error', 'login'));
   }
 }
