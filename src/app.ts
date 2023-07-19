@@ -7,7 +7,6 @@ import { UserController } from './user/user.controller';
 import { ExeptionFilter } from './errors/exeption.filter';
 import { ILogger } from './logger/logger.interface';
 import { TYPES } from './types';
-import { UserService } from './user/user.service';
 
 @injectable()
 export class App {
