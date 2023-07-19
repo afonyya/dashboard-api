@@ -36,6 +36,7 @@ export class App {
   }
 
   public init(): void {
+    this.useMiddleware();
     this.useRoutes();
     this.useExeptionFilters();
     this.server = this.app.listen(this.port);
