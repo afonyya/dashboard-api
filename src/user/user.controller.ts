@@ -22,7 +22,7 @@ export class UserController extends BaseController implements IUserController {
       {
         path: '/register',
         method: 'post',
-        middlewares: [new ValidateMiddleware(UserLoginDto)],
+        middlewares: [new ValidateMiddleware(UserRegisterDto)],
         handler: this.register,
       },
       { path: '/login', method: 'post', handler: this.login },
