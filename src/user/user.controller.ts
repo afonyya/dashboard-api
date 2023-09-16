@@ -34,6 +34,12 @@ export class UserController extends BaseController implements IUserController {
         middlewares: [new ValidateMiddleware(UserLoginDto)],
         handler: this.login,
       },
+      {
+        path: '/info',
+        method: 'get',
+        middlewares: [],
+        handler: this.info,
+      },
     ]);
   }
 
@@ -64,7 +70,11 @@ export class UserController extends BaseController implements IUserController {
     }
   }
 
-  signToken(email: string, secret: string): Promise<string> {
+  info({ user }: Request, res: Response): void {
+    this.ok(res, { email: user });
+  }
+
+  private signToken(email: string, secret: string): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       sign(
         { email, iat: Math.floor(Date.now() / 1000) },
